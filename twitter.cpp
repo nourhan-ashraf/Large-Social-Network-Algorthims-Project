@@ -77,7 +77,7 @@ int main()
     //cout<<s1.size()<<" "<<s2.size()<<endl;
 	cout<<"Enter the influncer order: "; //take the input from the user
 	int num; cin>>num;
-	if(num<1 || num>81000){
+	if(num<1 || num>81305){
 		cout<<"Wrong input!"<<endl;
 		return 0;
 	}
