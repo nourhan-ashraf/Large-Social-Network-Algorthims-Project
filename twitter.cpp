@@ -7,7 +7,7 @@
 using namespace std;
 
 //Global 
-int arr[81000+1];
+int arr[810000];
 map<int,int>mp;
 
 
@@ -47,7 +47,7 @@ int main()
 {
     //set<int>s1;
     //set<int>s2;
-	ifstream myFile("twitter.txt"); //open the data file
+	ifstream myFile("twitter.csv"); //open the data file
     if (myFile.is_open())
     {
         string line;
