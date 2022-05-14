@@ -12,8 +12,7 @@ map<int,int>mp;
 
 
 //compare function to sort vector of pairs
-bool cmp(pair<int, int>& a,
-         pair<int, int>& b)
+bool cmp(pair<int, int>& a, pair<int, int>& b)
 {
     return a.second > b.second;
 }
@@ -40,7 +39,7 @@ void search(int n){
         arr[i] = it.first;
 		i++;
     }
-	cout<<"Account ID: "<<arr[n]<<" , "<<"Followers: "<<mp[arr[n]]<<endl;
+	cout<<"Account ID: "<<arr[n]<<endl;
 }
 
 
@@ -48,7 +47,7 @@ int main()
 {
     set<int>s1;
     set<int>s2;
-	ifstream myFile("twitter.csv"); //open the data file
+	ifstream myFile("twitter.txt"); //open the data file
     if (myFile.is_open())
     {
         string line;
@@ -66,7 +65,7 @@ int main()
             //s2.insert(account);
 
             followersCount(account);
-			//cout<<dest<<" "<<src<<endl;
+			//cout<<account<<" "<<follower<<endl;
         }
 
     }
