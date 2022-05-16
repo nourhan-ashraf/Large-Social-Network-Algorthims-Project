@@ -1,45 +1,42 @@
 #include <bits/stdc++.h>
-#include <iostream>  
-#include <fstream>
-#include <sstream>
-#include <string>  
-#include <map>  
 using namespace std;
 
-//Global 
+//Time complexity is O(N)
+
+//Global variables
 int arr[810000];
-map<int,int>mp;
+map<int,int>counter;
 
 
 //compare function to sort vector of pairs
 bool cmp(pair<int, int>& a, pair<int, int>& b)
 {
-    return a.second > b.second;
+    return a.second > b.second;      //swaping doesn't affact the complexity remarkably
 }
 
 //count the degree(no. of followers) of each account
-void followersCount(int account) {
-    mp[account]++;
+void followersCount(int account) {   //O(1)for each call 
+    counter[account]++;                  
 }
 
 
-void search(int n){
+void searchFollowersCount(int n){   //O(nlogn)
 
 	//convert map to vector of pairs so it can be sorted
-	vector<pair<int, int> > A;
-	for (auto& it : mp) {
-        A.push_back(it);
+	vector<pair<int, int>>cp;
+	for (auto& it : counter) {
+        cp.push_back(it);              //O(n) for n of data
     }
-    sort(A.begin(), A.end(), cmp);
+    sort(cp.begin(), cp.end(), cmp);   //O(nlogn) 
 	//arr is aray of IDs and their order in descending order
 	int i=1;
-	 for (auto& it : A) {
+	 for (auto& it : cp) {
 		//i: order
 		//it.first: ID
-        arr[i] = it.first;
+        arr[i] = it.first;           //O(n) for n of data
 		i++;
     }
-	cout<<"Account ID: "<<arr[n]<<endl;
+	cout<<"Account ID: "<<arr[n]<<" , "<<"Followers: "<< counter[arr[n]];  
 }
 
 
@@ -47,11 +44,11 @@ int main()
 {
     //set<int>s1;
     //set<int>s2;
-	ifstream myFile("twitter.txt"); //open the data file
+	ifstream myFile("twitter.csv"); //open the data file
     if (myFile.is_open())
     {
         string line;
-        while(getline(myFile,line)) 
+        while(getline(myFile,line))   //O(N) for N lines of data
         {
             stringstream ss(line);
 			string x;
@@ -59,12 +56,12 @@ int main()
 			getline(ss,x,',');    //follower
             getline(ss,y,',');    //account
 			int follower, account;
-			follower = stoi(x);
+			//follower = stoi(x);
 			account = stoi(y);
             //s1.insert(follower);
             //s2.insert(account);
 
-            followersCount(account);
+            followersCount(account);   //O(1) for each account
 			//cout<<account<<" "<<follower<<endl;
         }
 
@@ -81,7 +78,7 @@ int main()
 		cout<<"Wrong input!"<<endl;
 		return 0;
 	}
-	search(num);
+	searchFollowersCount(num);  //O(n*log(n))
 
 	return 0;
 }
