@@ -139,7 +139,10 @@ int main()
     cin>>ID;
 	bool flag = 0;
     for(int i=1;i<=mapping.size();i++){ //Handle the case if the user entered wrong account ID.
-        if(mapping[ID]) flag = 1;
+        if(mapping[ID]) {
+            flag = 1;
+            break;
+        }
     }
     if(flag){
 	    searchAccounts(graph,ID);
