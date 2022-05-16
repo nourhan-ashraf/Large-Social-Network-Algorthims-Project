@@ -20,7 +20,7 @@ void followersCount(int account) {   //O(1)for each call
 }
 
 
-void searchFollowersCount(int n){   //O(nlogn)
+void searchFollowersCount(int account){   //O(nlogn)
 
 	//convert map to vector of pairs so it can be sorted
 	vector<pair<int, int>>cp;
@@ -36,7 +36,7 @@ void searchFollowersCount(int n){   //O(nlogn)
         arr[i] = it.first;           //O(n) for n of data
 		i++;
     }
-	cout<<"Account ID: "<<arr[n]<<" , "<<"Followers: "<< counter[arr[n]];  
+	cout<<"Account ID: "<<arr[account]<<" , "<<"Followers: "<< counter[arr[account]];  
 }
 
 
