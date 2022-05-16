@@ -2,7 +2,7 @@
 using namespace std;
 map<int,int>mapping;
 
-//Time complexity is O(n*d)
+//Time complexity is O(N*log(n))
 
 struct Graph {
 	int Vertcies; //number of vertices
@@ -33,7 +33,7 @@ void buildGraph(Graph* graph, int account, int following)   //O(log(n))
     }
 	
 
-void searchAccounts(Graph* graph, int account)  //O(n*d))
+void searchAccounts(Graph* graph, int account)  //O(d*d))
 {
 		unordered_set<int> lst = graph->adjList[mapping[account]];  //list of following
 		cout <<"Accounts you may know: ";
@@ -45,7 +45,7 @@ void searchAccounts(Graph* graph, int account)  //O(n*d))
             int cnt2=3;
             for(auto d = follow.begin() ; d != follow.end() ;++d){  //for each person in the "user ID" following list loop on its following list to find an ID that the "user ID" doesn't follow
                 if( (!(graph->adjList[mapping[account]].count(*d))) && cnt2!=0 && (*d)!=account){ // if an ID is found and it's not equal to the "user ID", print it and decrease the counter to find other one
-                    // //unordered_set "count" complexity is O(1) -> avarage , O(n) -> worst case
+                    // //unordered_set "count" complexity is O(1) -> avarage , O(d) -> worst case
                     cout << *d<<"  "; //print the suggestion
                     cnt2--;
                 }
@@ -71,7 +71,7 @@ int main()
     if (myFile.is_open())  
     {
         string line;
-        while(getline(myFile,line)) //O(Nlong(n)) for N of lines of data
+        while(getline(myFile,line)) //O(Nlog(n)) for N of lines of data
         {
             stringstream ss(line);
 			string x;
