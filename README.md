@@ -6,4 +6,6 @@ The first program can be used to retrieve the Top-influencer from the data when 
 
 The second program can suggest IDs of accounts that the entered account ID may know accourding to the following list of each ID account in the entered account ID following list using adjacency list graph implementation.
 
-PS. The combined code has both programs.
+The combined code has both programs.
+
+PS. twitter.txt has half of the data because the complete file is 42MB and github cannot upload this amount of data
