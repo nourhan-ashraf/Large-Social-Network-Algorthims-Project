@@ -15,7 +15,7 @@ void buildGraph(int follower, int account)   //O(log(E))
             mapping[account] = k;      //give each vertex an index beside its ID to be more easier to loop on each vertex 
             mapping2[k] = account;
         }
-        adjList[mapping[account]].insert(follower); //add list of following to each vertex
+        adjList[mapping[account]].insert(follower); //add list of followers to each vertex O(log(E))
 }
 
 
@@ -47,7 +47,7 @@ void printDegree(int num){  //O(V)
 
 int main()
 {
-    ifstream myFile("twitter.txt"); //open the data file
+    ifstream myFile("C:\\Users\\Noura\\Downloads\\twitter (1).csv"); //open the data file
 
     if (myFile.is_open())  
     {
