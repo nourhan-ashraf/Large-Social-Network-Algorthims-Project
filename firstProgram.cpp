@@ -1,4 +1,4 @@
-//Time complexity is O(E*log(E))
+//Time complexity is O(N*log(N))
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -8,14 +8,14 @@ map<int,int>mapping2; //map between the index and its account
 set<int>adjList[810000]; //array (vertcies) of sets (set for each vertex)
 
 int k=0;
-void buildGraph(int follower, int account)   //O(log(E))
+void buildGraph(int follower, int account)   //O(log(N))
 {
-        if(!mapping.count(account)){    //map "count" takes O(log(E))
+        if(!mapping.count(account)){    //map "count" takes O(log(N))
             k++;
             mapping[account] = k;      //give each vertex an index beside its ID to be more easier to loop on each vertex 
             mapping2[k] = account;
         }
-        adjList[mapping[account]].insert(follower); //add list of followers to each vertex O(log(E))
+        adjList[mapping[account]].insert(follower); //add list of followers to each vertex O(log(N))
 }
 
 
@@ -25,18 +25,18 @@ vector<pair<int, pair<int,int>>>v; //vector of pairs of pairs to map between thr
 //           v.first,  ,v.second.first ,v.second.second
 
 
-void printDegree(int num){  //O(V)
-    for (int i = 1; i <=81305; i++) {  //O(V)
+void printDegree(int num){  //O(n)
+    for (int i = 1; i <=81305; i++) {  //O(n)
         int lst = adjList[i].size();
         ans.insert(make_pair(lst,mapping2[i])); 
                           //size, id
     }
     int it = 81305;
-    for(auto u:ans){ //O(V)
+    for(auto u:ans){ //O(n)
         v.push_back(make_pair(it, make_pair(u.second, u.first)));  //u.second -> id, u.first -> size
         it--;
     }
-    for(auto j:v){  //O(V)
+    for(auto j:v){  //O(n)
         if(num==j.first){ 
             cout<<"Account ID: "<<j.second.first<<" , "<<"Followers: "<<j.second.second<<endl;
             break;
@@ -52,7 +52,7 @@ int main()
     if (myFile.is_open())  
     {
         string line;
-        while(getline(myFile,line)) //O(Elog(E)) for N of lines of data
+        while(getline(myFile,line)) //O(Nlog(N)) for N lines of data
         {
             stringstream ss(line);
 			string x;
@@ -78,7 +78,7 @@ int main()
 		cout<<"Wrong input!"<<endl;
 		return 0;
 	}
-	printDegree(num);  //O(V)
+	printDegree(num);  //O(n)
 
 	return 0;
 }
