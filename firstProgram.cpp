@@ -1,54 +1,59 @@
 #include <bits/stdc++.h>
 using namespace std;
+map<int,int>mapping;
+map<int,int>mapping2;
 
-//Time complexity is O(N)
+//Time complexity is O(N*log(N))
+set<int>adjList[810000];
 
-//Global variables
-int arr[810000];
-map<int,int>counter;
-
-
-//compare function to sort vector of pairs
-bool cmp(pair<int, int>& a, pair<int, int>& b)
+int k=0;
+void buildGraph(int follower, int account)   //O(log(N))
 {
-    return a.second > b.second;      //swaping doesn't affact the complexity remarkably
+        if(!mapping.count(account)){    //map "count" takes O(log(N))
+            k++;
+            mapping[account] = k;      //give each vertex an index beside its ID to be more easier to loop on each vertex 
+            mapping2[k] = account;
+        }
+        adjList[mapping[account]].insert(follower); //add list of following to each vertex
 }
 
-//count the degree(no. of followers) of each account
-void followersCount(int account) {   //O(1)for each call 
-    counter[account]++;                  
-}
+
+set<pair<int ,int>>ans;
+vector<pair<int, pair<int,int>>>v;
+//           index     id   size
+//           v.first,    v.second.first , v.second.second
 
 
-void searchFollowersCount(int account){   //O(nlogn)
-
-	//convert map to vector of pairs so it can be sorted
-	vector<pair<int, int>>cp;
-	for (auto& it : counter) {
-        cp.push_back(it);              //O(n) for n of data
+void printDegree(int num){
+    for (int i = 1; i <=81305; i++) {
+        int lst = adjList[i].size();
+        ans.insert(make_pair(lst,mapping2[i])); 
+                          //size, id
     }
-    sort(cp.begin(), cp.end(), cmp);   //O(nlogn) 
-	//arr is aray of IDs and their order in descending order
-	int i=1;
-	 for (auto& it : cp) {
-		//i: order
-		//it.first: ID
-        arr[i] = it.first;           //O(n) for n of data
-		i++;
-    }
-	cout<<"Account ID: "<<arr[account]<<" , "<<"Followers: "<< counter[arr[account]];  
-}
+   //(1000, 3197098), (500, 23618970), ....., etc
 
+    int it = 81305;
+    for(auto u:ans){
+        v.push_back(make_pair(it, make_pair(u.second, u.first)));  //u.second -> id, u.first -> size
+        it--;
+    }
+    for(auto j:v){
+        if(num==j.first){
+            cout<<"Account ID: "<<j.second.first<<" , "<<"Followers: "<<j.second.second<<endl;
+            break;
+        }
+    }
+    
+}
 
 int main()
 {
-    //set<int>s1;
-    //set<int>s2;
-	ifstream myFile("twitter.csv"); //open the data file
-    if (myFile.is_open())
+    ifstream myFile("C:\\Users\\Noura\\Downloads\\twitter (1).csv"); //open the data file
+
+    if (myFile.is_open())  
     {
         string line;
-        while(getline(myFile,line))   //O(N) for N lines of data
+        while(getline(myFile,line)) //O(Nlog(N)) for N of lines of data
         {
             stringstream ss(line);
 			string x;
@@ -56,13 +61,10 @@ int main()
 			getline(ss,x,',');    //follower
             getline(ss,y,',');    //account
 			int follower, account;
-			//follower = stoi(x);
+			follower = stoi(x);  //convert from string to int 
 			account = stoi(y);
-            //s1.insert(follower);
-            //s2.insert(account);
 
-            followersCount(account);   //O(1) for each account
-			//cout<<account<<" "<<follower<<endl;
+           buildGraph(follower, account); 
         }
 
     }
@@ -70,15 +72,11 @@ int main()
 		cout<<"Cannot open the file!"<<endl;
 		return 0;
 	}
-
-    //cout<<s1.size()<<" "<<s2.size()<<endl;
-	cout<<"Enter the influncer order: "; //take the input from the user
+//cout<<k<<endl;
+    cout<<"Enter the influncer order: "; //take the input from the user
 	int num; cin>>num;
-	if(num<1 || num>81305){
-		cout<<"Wrong input!"<<endl;
-		return 0;
-	}
-	searchFollowersCount(num);  //O(n*log(n))
+
+	printDegree(num); 
 
 	return 0;
 }
