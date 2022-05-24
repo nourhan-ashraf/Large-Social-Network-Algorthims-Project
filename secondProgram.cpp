@@ -49,7 +49,7 @@ void searchAccounts(int account)  //O(d*log(d)))
 int main()
 {
 
-    ifstream myFile("twitter.txt"); //open the data file
+    ifstream myFile("twitter.csv"); //open the data file
 
     if (myFile.is_open())  
     {
