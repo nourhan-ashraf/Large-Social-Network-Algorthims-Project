@@ -28,7 +28,7 @@ void searchAccounts(int account)  //O(d*log(d)))
         auto itr = lst.begin();
         int cnt=3;
         //O(3*d) -> worst case ,  d is the number of following in the following list
-        while(itr != lst.end() && cnt!=0){  //loop on the following list of the account ID
+        while(itr != lst.end() || cnt!=0){  //loop on the following list of the account ID
             set<int> follow = adjList[mapping[*itr]]; //following list of each ID in the "user ID" the following list
             int cnt2=3;
             for(auto d = follow.begin() ; d != follow.end() ;++d){  //for each person in the "user ID" following list loop on its following list to find an ID that the "user ID" doesn't follow
