@@ -25,10 +25,10 @@ vector<pair<int, pair<int,int>>>v; //vector of pairs of pairs to map between thr
 //           v.first,  ,v.second.first ,v.second.second
 
 
-void printDegree(int num){  //O(n)
+void printDegree(int num){  //O(nlog(n))
     for (int i = 1; i <=81305; i++) {  //O(n)
         int lst = adjList[i].size();
-        ans.insert(make_pair(lst,mapping2[i])); 
+        ans.insert(make_pair(lst,mapping2[i])); //log(n)
                           //size, id
     }
     int it = 81305;
