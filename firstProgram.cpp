@@ -47,7 +47,7 @@ void printDegree(int num){  //O(nlog(n))
 
 int main()
 {
-    ifstream myFile("C:\\Users\\Noura\\Downloads\\twitter (1).csv"); //open the data file
+    ifstream myFile("twitter.csv"); //open the data file
 
     if (myFile.is_open())  
     {
